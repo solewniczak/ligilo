@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ligilo</title>
+    <style>
+        textarea {
+            display: block;
+            width:98%;
+            height:100%;
+        }
+        #ligilo-column-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            grid-auto-rows: 300px;
+        }
+        #ligilo-column-buttons {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="ligilo-column-wrapper">
+      <div id="ligilo-column-text">
+          <textarea>Michael Jordan is an American businessman and former professional basketball player.</textarea>
+      </div>
+      <div id="ligilo-column-buttons">
+          <button name="spacy-ner">spaCy NER</button>
+      </div>
+      <div id="ligilo-column-ed">
+          <textarea></textarea>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>init({{config|tojson}});</script>
+</body>
+</html>

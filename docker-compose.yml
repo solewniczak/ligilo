@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    environment:
+      - FLASK_APP=ligilo
+      - SECRET_KEY=changeme
+      - BASE_URL=http://localhost:8000
+      - PREFIX=/ligilo
+    ports:
+      - "8000:8000"
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
