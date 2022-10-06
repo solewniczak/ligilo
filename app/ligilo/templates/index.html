@@ -17,6 +17,15 @@
         #ligilo-column-buttons {
             text-align: center;
         }
+        #ligilo-column-ed .visual .ner-class {
+            padding-left: .5em;
+        }
+        #ligilo-column-ed .visual .target {
+            vertical-align: sub;
+            color: blue;
+            text-decoration: underline;
+            font-size: 80%;
+        }
     </style>
 </head>
 <body>
@@ -25,10 +34,13 @@
           <textarea>Michael Jordan is an American businessman and former professional basketball player.</textarea>
       </div>
       <div id="ligilo-column-buttons">
-          <button name="spacy-ner">spaCy NER</button>
+        <button name="md" value="spacy">spaCy NER</button>
       </div>
       <div id="ligilo-column-ed">
           <textarea></textarea>
+          <div class="visual" style="display: none;"></div>
+          <button name="ed-view" value="text">Text</button>
+          <button name="ed-view" value="visual">Visual</button>
       </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
