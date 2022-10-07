@@ -54,22 +54,32 @@ def api_ner():
         new_text += text[start:ent.start_char] + '{{' + ent.text + '|' + ent.label_ + '|}}'
         start += len(text[start:ent.start_char]) + len(ent.text)
     new_text += text[doc.ents[-1].end_char:]
-    return {'text': new_text}
+    return {'text': new_text, 'html': text_to_html(new_text)}
 
 
-@app.route('/api/text/to/visual', methods=('POST',))
-def api_text_to_visual():
+@app.route('/api/text/to/html', methods=('POST',))
+def api_text_to_html():
     request_json = request.get_json()
     text = request_json['text']
-    html = re.sub(r'{{([^|}]*)\|([^|}]*)\|([^|}]*)}}',
-                  r'<mark><span class="mention">\1</span><span class="target">\3</span><span class="ner-class">\2</span></mark>', text)
+    html = text_to_html(text)
     return {'html': html}
 
 
-@app.route('/api/visual/to/text', methods=('POST',))
-def api_visual_to_text():
+@app.route('/api/html/to/text', methods=('POST',))
+def api_html_to_text():
     request_json = request.get_json()
     html = request_json['html']
-    text = re.sub(r'<mark><span class="mention">([^<]*)</span><span class="target">([^<]*)</span><span class="ner-class">([^<]*)</span></mark>',
-                  r'{{\1|\3|\2}}', html)
+    text = html_to_text(html)
     return {'text': text}
+
+
+def text_to_html(text):
+    return re.sub(r'{{([^|}]*)\|([^|}]*)\|([^|}]*)}}',
+                  r'<mark><span class="mention">\1</span><span class="target">\3</span><span class="ner-class">\2</span></mark>',
+                  text)
+
+
+def html_to_text(html):
+    return re.sub(
+        r'<mark><span class="mention">([^<]*)</span><span class="target">([^<]*)</span><span class="ner-class">([^<]*)</span></mark>',
+        r'{{\1|\3|\2}}', html)

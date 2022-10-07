@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Ligilo</title>
     <style>
+        body {
+            font-family: sans-serif;
+        }
         textarea {
             display: block;
             width:98%;
@@ -11,7 +14,7 @@
         }
         #ligilo-column-wrapper {
             display: grid;
-            grid-template-columns: 2fr 1fr 2fr;
+            grid-template-columns: 6fr 1fr 6fr;
             grid-auto-rows: 300px;
         }
         #ligilo-column-buttons {
@@ -25,6 +28,29 @@
             color: blue;
             text-decoration: underline;
             font-size: 80%;
+        }
+        #ligilo-target-selector {
+            background: #fff;
+            border: 1px solid #999;
+            max-width: 400px;
+            position: absolute;
+        }
+        #ligilo-target-selector input {
+            box-sizing: border-box;
+            width: 100%;
+        }
+        #ligilo-target-selector table {
+            border-collapse: collapse;
+        }
+        #ligilo-target-selector table tr:hover {
+            background: #ccc;
+        }
+        #ligilo-target-selector a {
+            display: block;
+        }
+        #ligilo-target-selector span {
+            font-size: 90%;
+            color: #333;
         }
     </style>
 </head>
@@ -42,6 +68,10 @@
           <button name="ed-view" value="text">Text</button>
           <button name="ed-view" value="visual">Visual</button>
       </div>
+    </div>
+    <div id="ligilo-target-selector" style="display: none;">
+        <input name="search" />
+        <table></table>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>init({{config|tojson}});</script>
