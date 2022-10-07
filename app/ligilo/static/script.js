@@ -85,17 +85,19 @@ const init = (config) => {
         const result = await response.json();
         const targetSelectorTable = document.querySelector('#ligilo-target-selector table');
         targetSelectorTable.innerHTML = '';
-        const sortedPages = result.query.pages.sort((a, b) => {
-            return a.index - b.index;
-        });
-        result.query.pages.forEach(page => {
-            const imgSrc = page.hasOwnProperty('thumbnail') ? page.thumbnail.source : '';
-            targetSelectorTable.innerHTML += '<tr data-target="' + page.title + '">' +
-                '<td><img alt="" src="' + imgSrc + '" /></td>' +
-                '<td><a href="https://en.wikipedia.org/wiki/' + page.title + '" target="_blank">' + page.title + '</a>' +
-                '<span>' + page.description + '</span></td>' +
-            '</tr>';
-        });
+        if (result.hasOwnProperty('query')) {
+            const sortedPages = result.query.pages.sort((a, b) => {
+                return a.index - b.index;
+            });
+            result.query.pages.forEach(page => {
+                const imgSrc = page.hasOwnProperty('thumbnail') ? page.thumbnail.source : '';
+                targetSelectorTable.innerHTML += '<tr data-target="' + page.title + '">' +
+                    '<td><img alt="" src="' + imgSrc + '" /></td>' +
+                    '<td><a href="https://en.wikipedia.org/wiki/' + page.title + '" target="_blank">' + page.title + '</a>' +
+                    '<span>' + page.description + '</span></td>' +
+                    '</tr>';
+            });
+        }
     };
 
     let currentMark = null; //reference to currently edited mention
