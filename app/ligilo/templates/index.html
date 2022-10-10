@@ -52,12 +52,66 @@
             font-size: 90%;
             color: #333;
         }
+        #ligilo-target-selector .icon {
+            width: 60px;
+            height: 60px;
+            background-color: #c8ccd1;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+        }
+        #ligilo-target-selector .default.icon {
+            background-image: url("{{ url_for('static', filename='article.svg') }}");
+        }
+        #ligilo-target-selector .redirect.icon {
+            background-image: url("{{ url_for('static', filename='articleRedirect.svg') }}");
+        }
     </style>
 </head>
 <body>
     <div id="ligilo-column-wrapper">
       <div id="ligilo-column-text">
           <textarea>Michael Jordan is an American businessman and former professional basketball player.</textarea>
+          <h1>SpaCy NER labels</h1>
+          <dl>
+              <dt>CARDINAL</dt>
+              <dd></dd>
+              <dt>DATE</dt>
+              <dd></dd>
+              <dt>EVENT</dt>
+              <dd></dd>
+              <dt>FAC</dt>
+              <dd></dd>
+              <dt>GPE</dt>
+              <dd></dd>
+              <dt>LANGUAGE</dt>
+              <dd></dd>
+              <dt>LAW</dt>
+              <dd></dd>
+              <dt>LOC</dt>
+              <dd></dd>
+              <dt>MONEY</dt>
+              <dd></dd>
+              <dt>NORP</dt>
+              <dd></dd>
+              <dt>ORDINAL</dt>
+              <dd></dd>
+              <dt>ORG</dt>
+              <dd></dd>
+              <dt>PERCENT</dt>
+              <dd></dd>
+              <dt>PERSON</dt>
+              <dd></dd>
+              <dt>PRODUCT</dt>
+              <dd></dd>
+              <dt>QUANTITY</dt>
+              <dd></dd>
+              <dt>TIME</dt>
+              <dd></dd>
+              <dt>WORK_OF_ART</dt>
+              <dd></dd>
+
+          </dl>
       </div>
       <div id="ligilo-column-buttons">
         <button name="md" value="spacy">spaCy NER</button>
