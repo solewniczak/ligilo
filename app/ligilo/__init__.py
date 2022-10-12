@@ -43,15 +43,19 @@ def main():
 def api_ner():
     request_json = request.get_json()
     text = request_json['text']
-    nlp = spacy.load('en_core_web_sm')
+    excluded = request_json['excluded']
+    nlp = spacy.load('en_core_web_trf')
     doc = nlp(text)
     if len(doc.ents) == 0:
-        return {'text': text}
+        return {'text': text, 'html': text}
 
     new_text = ''
     start = 0
     for ent in doc.ents:
-        new_text += text[start:ent.start_char] + '{{' + ent.text + '|' + ent.label_ + '|}}'
+        if ent.label_ in excluded:
+            new_text += text[start:ent.start_char] + ent.text
+        else:
+            new_text += text[start:ent.start_char] + '{{' + ent.text + '|' + ent.label_ + '|}}'
         start += len(text[start:ent.start_char]) + len(ent.text)
     new_text += text[doc.ents[-1].end_char:]
     return {'text': new_text, 'html': text_to_html(new_text)}
@@ -75,11 +79,11 @@ def api_html_to_text():
 
 def text_to_html(text):
     return re.sub(r'{{([^|}]*)\|([^|}]*)\|([^|}]*)}}',
-                  r'<mark><span class="mention">\1</span><span class="target">\3</span><span class="ner-class">\2</span></mark>',
+                  r'<mark><span class="mention">\1</span></span><span class="ner-class">\2</span><span class="target">\3</mark>',
                   text)
 
 
 def html_to_text(html):
     return re.sub(
-        r'<mark><span class="mention">([^<]*)</span><span class="target">([^<]*)</span><span class="ner-class">([^<]*)</span></mark>',
-        r'{{\1|\3|\2}}', html)
+        r'<mark><span class="mention">([^<]*)</span><span class="ner-class">([^<]*)</span><span class="target">([^<]*)</span></mark>',
+        r'{{\1|\2|\3}}', html)

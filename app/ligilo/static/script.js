@@ -15,13 +15,15 @@ const init = (config) => {
                 return;
             }
             const text = document.querySelector('#ligilo-column-text textarea').value;
+            const selected_labels = document.querySelectorAll('#ligilo-md-excluded-labels option:checked');
+            const excluded = Array.from(selected_labels).map(el => el.value);
             const uri = requestUri('/api/ner');
             const response = await fetch(uri,{
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({'text': text})
+                body: JSON.stringify({'text': text, 'excluded': excluded})
             });
             const result = await response.json();
             document.querySelector('#ligilo-column-ed textarea').value = result.text;

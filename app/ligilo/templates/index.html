@@ -6,6 +6,10 @@
     <style>
         body {
             font-family: sans-serif;
+            font-size: 10pt;
+        }
+        h1 {
+            font-size: 12pt;
         }
         textarea {
             display: block;
@@ -21,13 +25,17 @@
             text-align: center;
         }
         #ligilo-column-ed .visual .ner-class {
-            padding-left: .5em;
+            padding-left: .3em;
+            vertical-align: sub;
+            font-size: 80%;
+            color: #666;
         }
         #ligilo-column-ed .visual .target {
+            padding-left: .3em;
             vertical-align: sub;
+            font-size: 80%;
             color: blue;
             text-decoration: underline;
-            font-size: 80%;
         }
         #ligilo-target-selector {
             background: #fff;
@@ -75,46 +83,65 @@
           <h1>SpaCy NER labels</h1>
           <dl>
               <dt>CARDINAL</dt>
-              <dd></dd>
+              <dd>Numerals that do not fall under another type</dd>
               <dt>DATE</dt>
-              <dd></dd>
+              <dd>Absolute or relative dates or periods</dd>
               <dt>EVENT</dt>
-              <dd></dd>
+              <dd>Named hurricanes, battles, wars, sports events, etc.</dd>
               <dt>FAC</dt>
-              <dd></dd>
+              <dd>Buildings, airports, highways, bridges, etc.</dd>
               <dt>GPE</dt>
-              <dd></dd>
+              <dd>Countries, cities, states</dd>
               <dt>LANGUAGE</dt>
-              <dd></dd>
+              <dd>Any named language</dd>
               <dt>LAW</dt>
-              <dd></dd>
+              <dd>Named documents made into laws.</dd>
               <dt>LOC</dt>
-              <dd></dd>
+              <dd>Non-GPE locations, mountain ranges, bodies of water</dd>
               <dt>MONEY</dt>
-              <dd></dd>
+              <dd>Monetary values, including unit</dd>
               <dt>NORP</dt>
-              <dd></dd>
+              <dd>Nationalities or religious or political groups</dd>
               <dt>ORDINAL</dt>
-              <dd></dd>
+              <dd>"first", "second", etc.</dd>
               <dt>ORG</dt>
-              <dd></dd>
+              <dd>Companies, agencies, institutions, etc.</dd>
               <dt>PERCENT</dt>
-              <dd></dd>
+              <dd>Percentage, including "%"</dd>
               <dt>PERSON</dt>
-              <dd></dd>
+              <dd>People, including fictional</dd>
               <dt>PRODUCT</dt>
-              <dd></dd>
+              <dd>Objects, vehicles, foods, etc. (not services)</dd>
               <dt>QUANTITY</dt>
-              <dd></dd>
+              <dd>Measurements, as of weight or distance</dd>
               <dt>TIME</dt>
-              <dd></dd>
+              <dd>Times smaller than a day</dd>
               <dt>WORK_OF_ART</dt>
-              <dd></dd>
-
+              <dd>Titles of books, songs, etc.</dd>
           </dl>
       </div>
       <div id="ligilo-column-buttons">
-        <button name="md" value="spacy">spaCy NER</button>
+          <label for="ligilo-md-excluded-labels">Excluded labels:</label>
+          <select id="ligilo-md-excluded-labels" multiple size="17">
+              <option selected>CARDINAL</option>
+              <option selected>DATE</option>
+              <option>EVENT</option>
+              <option>FAC</option>
+              <option>GPE</option>
+              <option>LAW</option>
+              <option>LOC</option>
+              <option selected>MONEY</option>
+              <option>NORP</option>
+              <option selected>ORDINAL</option>
+              <option>ORG</option>
+              <option selected>PERCENT</option>
+              <option>PERSON</option>
+              <option>PRODUCT</option>
+              <option selected>QUANTITY</option>
+              <option selected>TIME</option>
+              <option>WORK_OF_ART</option>
+          </select>
+          <button name="md" value="spacy">spaCy NER</button>
       </div>
       <div id="ligilo-column-ed">
           <textarea></textarea>
