@@ -44,7 +44,7 @@ def api_ner():
     request_json = request.get_json()
     text = request_json['text']
     excluded = request_json['excluded']
-    nlp = spacy.load('en_core_web_trf')
+    nlp = spacy.load('en_core_web_sm')
     doc = nlp(text)
     if len(doc.ents) == 0:
         return {'text': text, 'html': text}
