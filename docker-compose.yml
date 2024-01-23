@@ -4,8 +4,8 @@ services:
     environment:
       - FLASK_APP=ligilo
       - SECRET_KEY=changeme
-      - BASE_URL=http://localhost:8000
-      - PREFIX=/ligilo
+      - BASE_URL=http://localhost:8000  # The base url of the application.
+      - PREFIX=/ligilo  # The path to the application on the web server. Useful when running behind proxy. Left empty for no prefix.
     ports:
       - "8000:8000"
     volumes:
